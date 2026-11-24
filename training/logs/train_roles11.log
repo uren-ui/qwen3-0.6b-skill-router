@@ -1,0 +1,95 @@
+﻿python.exe : W1114 06:50:01.966000 9976 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NO
+TE: Redirects are currently not supported in Windows or MacOs.
+所在位置 行:1 字符: 275
++ ... :BATCH="4"; & "D:\ai-lab\.venv\Scripts\python.exe" "D:\ai-lab\coordin ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (W1114 06:50:01....ndows or MacOs.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[1] 加载模型（bf16）
+
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]
+Loading weights:  18%|█▊        | 55/311 [00:00<00:00, 546.73it/s]
+Loading weights:  39%|███▉      | 121/311 [00:00<00:00, 610.65it/s]
+Loading weights:  61%|██████    | 190/311 [00:00<00:00, 645.12it/s]
+Loading weights:  82%|████████▏ | 255/311 [00:00<00:00, 637.47it/s]
+Loading weights: 100%|██████████| 311/311 [00:00<00:00, 644.30it/s]
+trainable params: 10,092,544 || all params: 606,142,464 || trainable%: 1.6650
+[2] 构造数据集
+    tokenize 0/3394
+    tokenize 200/3394
+    tokenize 400/3394
+    tokenize 600/3394
+    tokenize 800/3394
+    tokenize 1000/3394
+    tokenize 1200/3394
+    tokenize 1400/3394
+    tokenize 1600/3394
+    tokenize 1800/3394
+    tokenize 2000/3394
+    tokenize 2200/3394
+    tokenize 2400/3394
+    tokenize 2600/3394
+    tokenize 2800/3394
+    tokenize 3000/3394
+    tokenize 3200/3394
+    训练样本 3394（跳过 0）  验证 312
+[3] 开始训练  849 步/epoch × 3 = 2547 步
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+    step 20/2547  loss 0.4741  lr 3.29e-05
+    step 40/2547  loss 0.2963  lr 6.53e-05
+    step 60/2547  loss 0.5031  lr 9.71e-05
+    step 80/2547  loss 0.0508  lr 1.28e-04
+    step 100/2547  loss 0.3615  lr 1.59e-04
+    step 120/2547  loss 0.0081  lr 1.90e-04
+    step 140/2547  loss 0.0048  lr 1.99e-04
+    step 160/2547  loss 0.1185  lr 1.97e-04
+    step 180/2547  loss 0.1492  lr 1.96e-04
+    step 200/2547  loss 0.0446  lr 1.94e-04
+    step 220/2547  loss 0.1398  lr 1.92e-04
+    step 240/2547  loss 0.3654  lr 1.91e-04
+    step 260/2547  loss 0.0956  lr 1.89e-04
+    step 280/2547  loss 0.0558  lr 1.87e-04
+    step 300/2547  loss 0.0288  lr 1.86e-04
+    step 320/2547  loss 0.0020  lr 1.84e-04
+    step 340/2547  loss 0.1632  lr 1.82e-04
+    step 360/2547  loss 0.0020  lr 1.81e-04
+    step 380/2547  loss 0.0480  lr 1.79e-04
+    step 400/2547  loss 0.0238  lr 1.77e-04
+    step 420/2547  loss 0.0003  lr 1.76e-04
+    step 440/2547  loss 0.0123  lr 1.74e-04
+    step 460/2547  loss 0.0204  lr 1.72e-04
+    step 480/2547  loss 0.0018  lr 1.71e-04
+    step 500/2547  loss 0.0000  lr 1.69e-04
+    step 520/2547  loss 0.0381  lr 1.68e-04
+    step 540/2547  loss 0.0014  lr 1.66e-04
+    step 560/2547  loss 0.0130  lr 1.64e-04
+    step 580/2547  loss 0.0001  lr 1.63e-04
+    step 600/2547  loss 0.0007  lr 1.61e-04
+    step 620/2547  loss 0.0001  lr 1.59e-04
+    step 640/2547  loss 0.0013  lr 1.58e-04
+    step 660/2547  loss 0.0000  lr 1.56e-04
+    step 680/2547  loss 0.0005  lr 1.54e-04
+    step 700/2547  loss 0.0003  lr 1.53e-04
+    step 720/2547  loss 0.0046  lr 1.51e-04
+Traceback (most recent call last):
+  File "D:\ai-lab\coordinator\train_judge.py", line 244, in <module>
+    main()
+  File "D:\ai-lab\coordinator\train_judge.py", line 212, in main
+    for i, (ids, labels, mask) in enumerate(dl):
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\utils\data\dataloader.py", line 741, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\utils\data\dataloader.py", line 801, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\utils\data\_utils\fetch.py", line 57, in fetch
+    return self.collate_fn(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\coordinator\train_judge.py", line 197, in <lambda>
+    collate_fn=lambda b: collate(b, tok.pad_token_id))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\coordinator\train_judge.py", line 137, in collate
+    return (torch.tensor(ids), torch.tensor(labels), torch.tensor(mask))
+                                                     ^^^^^^^^^^^^^^^^^^
+TypeError: not a sequence

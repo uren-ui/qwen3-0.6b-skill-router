@@ -1,0 +1,90 @@
+﻿python.exe : W1112 17:10:37.389000 10444 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] N
+OTE: Redirects are currently not supported in Windows or MacOs.
+所在位置 行:1 字符: 258
++ ... LEN="1024"; & "D:\ai-lab\.venv\Scripts\python.exe" "D:\ai-lab\coordin ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (W1112 17:10:37....ndows or MacOs.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[1] 加载模型（bf16）
+
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]
+Loading weights:  13%|█▎        | 41/311 [00:00<00:00, 406.90it/s]
+Loading weights:  28%|██▊       | 88/311 [00:00<00:00, 438.33it/s]
+Loading weights:  47%|████▋     | 146/311 [00:00<00:00, 499.65it/s]
+Loading weights:  64%|██████▍   | 200/311 [00:00<00:00, 514.41it/s]
+Loading weights:  81%|████████  | 252/311 [00:00<00:00, 489.65it/s]
+Loading weights:  97%|█████████▋| 302/311 [00:00<00:00, 457.93it/s]
+Loading weights: 100%|██████████| 311/311 [00:00<00:00, 479.58it/s]
+trainable params: 10,092,544 || all params: 606,142,464 || trainable%: 1.6650
+[2] 构造数据集
+    tokenize 0/2670
+    tokenize 200/2670
+    tokenize 400/2670
+    tokenize 600/2670
+    tokenize 800/2670
+    tokenize 1000/2670
+    tokenize 1200/2670
+    tokenize 1400/2670
+    tokenize 1600/2670
+    tokenize 1800/2670
+    tokenize 2000/2670
+    tokenize 2200/2670
+    tokenize 2400/2670
+    tokenize 2600/2670
+    训练样本 2670（跳过 0）  验证 312
+[3] 开始训练  334 步/epoch × 3 = 1002 步
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+    step 20/1002  loss 0.3955  lr 8.25e-05
+    step 40/1002  loss 0.1605  lr 1.62e-04
+    step 60/1002  loss 0.0240  lr 1.98e-04
+    step 80/1002  loss 0.0168  lr 1.94e-04
+    step 100/1002  loss 0.0481  lr 1.89e-04
+    step 120/1002  loss 0.0060  lr 1.85e-04
+    step 140/1002  loss 0.0435  lr 1.81e-04
+    step 160/1002  loss 0.0019  lr 1.77e-04
+    step 180/1002  loss 0.0097  lr 1.73e-04
+    step 200/1002  loss 0.0046  lr 1.68e-04
+    step 220/1002  loss 0.0009  lr 1.64e-04
+    step 240/1002  loss 0.0011  lr 1.60e-04
+    step 260/1002  loss 0.0359  lr 1.56e-04
+    step 280/1002  loss 0.0054  lr 1.52e-04
+    step 300/1002  loss 0.0089  lr 1.47e-04
+    step 320/1002  loss 0.0005  lr 1.43e-04
+  epoch 1 平均 loss 0.0702
+  >> 验证集精确匹配 58/60 = 97%
+    step 340/1002  loss 0.0001  lr 1.39e-04
+    step 360/1002  loss 0.0034  lr 1.35e-04
+    step 380/1002  loss 0.0009  lr 1.31e-04
+    step 400/1002  loss 0.0005  lr 1.26e-04
+    step 420/1002  loss 0.0189  lr 1.22e-04
+    step 440/1002  loss 0.0004  lr 1.18e-04
+    step 460/1002  loss 0.0001  lr 1.14e-04
+    step 480/1002  loss 0.0222  lr 1.10e-04
+    step 500/1002  loss 0.0001  lr 1.05e-04
+    step 520/1002  loss 0.0024  lr 1.01e-04
+    step 540/1002  loss 0.0034  lr 9.71e-05
+    step 560/1002  loss 0.0023  lr 9.29e-05
+    step 580/1002  loss 0.0002  lr 8.87e-05
+    step 600/1002  loss 0.0002  lr 8.45e-05
+    step 620/1002  loss 0.0007  lr 8.03e-05
+    step 640/1002  loss 0.0044  lr 7.61e-05
+    step 660/1002  loss 0.0002  lr 7.18e-05
+  epoch 2 平均 loss 0.0029
+  >> 验证集精确匹配 60/60 = 100%
+    step 680/1002  loss 0.0001  lr 6.76e-05
+    step 700/1002  loss 0.0000  lr 6.34e-05
+    step 720/1002  loss 0.0000  lr 5.92e-05
+    step 740/1002  loss 0.0001  lr 5.50e-05
+    step 760/1002  loss 0.0014  lr 5.08e-05
+    step 780/1002  loss 0.0008  lr 4.66e-05
+    step 800/1002  loss 0.0000  lr 4.24e-05
+    step 820/1002  loss 0.0025  lr 3.82e-05
+    step 840/1002  loss 0.0000  lr 3.40e-05
+    step 860/1002  loss 0.0001  lr 2.98e-05
+    step 880/1002  loss 0.0000  lr 2.56e-05
+    step 900/1002  loss 0.0000  lr 2.14e-05
+    step 920/1002  loss 0.0000  lr 1.72e-05
+    step 940/1002  loss 0.0000  lr 1.30e-05
+    step 960/1002  loss 0.0000  lr 8.82e-06
+    step 980/1002  loss 0.0000  lr 4.62e-06

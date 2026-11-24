@@ -1,0 +1,203 @@
+---
+base_model: Qwen/Qwen3-0.6B
+library_name: peft
+pipeline_tag: text-generation
+tags:
+- lora
+- peft
+- transformers
+- agent
+- tool-use
+- routing
+- qwen3
+license: apache-2.0
+language:
+- zh
+- en
+datasets:
+- local:synthetic-skill-routing
+metrics:
+- exact_match
+---
+
+# Qwen3-0.6B Skill Router
+
+A LoRA adapter that turns *"one sentence from the user + the list of currently available skills"* into a single structured routing decision: which skill to call, with which parameters — or ask one clarifying question, or refuse.
+
+This is a **router, not a generator**. It never writes content; it decides who does.
+
+## Model Details
+
+- **Developed by:** Local AI Lab (single-developer local agent project)
+- **Model type:** PEFT LoRA adapter on a causal LM
+- **Base model:** [`Qwen/Qwen3-0.6B`](https://huggingface.co/Qwen/Qwen3-0.6B) (Apache-2.0)
+- **Languages:** Chinese (primary), some English task phrasing
+- **License:** Apache-2.0 (inherited from base)
+- **Adapter size:** 40,422,168 bytes (`adapter_model.safetensors`), 10,092,544 trainable params = **1.665%** of the 606M-param base
+
+### Why a 0.6B model does the routing
+
+In a local multi-agent setup on a single 20 GB GPU, a 4B–7B model used as the coordinator eats most of the VRAM, leaving no room for the models that actually produce output (image, video, code). Routing is a **classification** task, not a generation task — so it can be compressed hard. A 0.6B base plus a 10M-param adapter runs in a few hundred MB and still hits the format reliably.
+
+## Uses
+
+### Direct use
+
+Give it a skill manifest and a task; get back exactly one line of JSON.
+
+Input (user message):
+
+```
+可用技能：
+- switch_model（成功率1.0，中位7.98s）：把本地模型服务切换成指定模型……｜参数：model（必填）…
+- write_svg（成功率0.5，中位6.39s，坑:环境不满足×1）：画一张图存到文件……
+- generate_image（成功率1.0，中位3.04s）：画一张图片（PNG）存成文件……
+
+任务：给我画下雨天的街道，存到 D:\ai-lab\pelican.svg
+输出 JSON：
+```
+
+Output:
+
+```json
+{"action":"call","skill":"write_svg","params":{"spec":"下雨天的街道","path":"D:\\ai-lab\\pelican.svg"}}
+```
+
+Four possible outputs:
+
+| Output shape | Meaning |
+|---|---|
+| `{"action":"call","skill":…,"params":{…}}` | fully doable |
+| `{"action":"call","skill":…,"params":{…},"note":…}` | partially doable, note explains the rest |
+| `{"action":"ask","need":…}` | missing info, one question would unblock it — **do not guess** |
+| `{"action":"refuse","reason":…}` | no such capability in the manifest |
+
+Note that `ask` and `refuse` are **positive outcomes**, not failures. 20% of the training data is `refuse` and 7.7% is `ask`, deliberately, to stop the model from inventing skill names.
+
+### Out-of-scope use
+
+- Long or multi-turn conversation, anything requiring memory of prior turns
+- Explaining *why* it chose a skill
+- Producing any content itself (text, code, images)
+- Zero-shot transfer to a different/larger skill pool — the skill list is **runtime-injected text**, and changing it meaningfully requires regenerating data and retraining
+
+## Bias, Risks, Limitations
+
+- **Templated synthetic data.** Average task is 23.6 characters, generated from templates. Real users phrase things loosely; the model then over-predicts `ask` or `refuse`.
+- **Format memorization, not reasoning.** Training loss reaches 0.0012 by epoch 3 — it has learned the output schema, not the semantics.
+- **Small eval set.** Only 60 held-out examples, drawn from the same distribution as training. The reported 100% exact match should be read as "it didn't break", not "it generalizes".
+- **Composed skills (`combo:*`) have fewer than 100 samples** and are effectively unlearned.
+- No handling of code-switching, typos, or dialect.
+
+## How to Get Started
+
+```python
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import PeftModel
+
+tok = AutoTokenizer.from_pretrained("adapter")          # or the HF repo id
+model = PeftModel.from_pretrained(
+    AutoModelForCausalLM.from_pretrained("Qwen/Qwen3-0.6B", torch_dtype=torch.bfloat16, device_map="cuda"),
+    "adapter",
+).eval()
+
+msgs = [
+    {"role": "system", "content": SYSTEM_PROMPT},
+    {"role": "user", "content": f"{manifest}\n任务：{task}\n输出 JSON："},
+]
+text = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True, enable_thinking=False)
+ids = tok(text, return_tensors="pt").to(model.device)
+out = model.generate(**ids, max_new_tokens=120, do_sample=False, pad_token_id=tok.eos_token_id)
+print(tok.decode(out[0][ids["input_ids"].shape[1]:], skip_special_tokens=True))
+```
+
+`enable_thinking=False` is mandatory on both sides — training used it, inference must too.
+
+See `examples/infer.py` for a runnable script, and `README.md` for the exact system prompt.
+
+## Training Details
+
+### Training data
+
+3,394 synthetic routing samples (`training/data/train_mix.jsonl`), each with three fields:
+
+```json
+{"task": "...", "manifest": "可用技能：\n- ...", "output": "{...json string...}"}
+```
+
+Label distribution: `call` 2,450 (72.2%) / `refuse` 682 (20.1%) / `ask` 262 (7.7%).
+
+Data was generated by template expansion over each skill's parameter schema, paired with a *real* manifest captured from execution statistics at generation time (success rate, median latency, known failure modes). Labels were produced by rules, not by a large model — to avoid distilling a bigger model's hallucinations into a 0.6B one.
+
+### Training procedure
+
+Hand-written training loop (no `trl`, no `bitsandbytes`) — 0.6B fits in bf16, and bitsandbytes on Windows is more trouble than it saves.
+
+```text
+precision        bf16
+lora_r           16
+lora_alpha       32
+lora_dropout     0.05
+target_modules   q_proj k_proj v_proj o_proj gate_proj up_proj down_proj
+optimizer        AdamW(lr=2e-4, weight_decay=0.01)
+scheduler        linear warmup 5% + linear decay to 0
+grad_clip        1.0
+batch_size       4
+max_len          512 tokens (samples longer than this were dropped)
+epochs           3  (2,547 steps)
+hardware         single RTX 3080 20GB
+wall clock       53.3 minutes
+```
+
+Loss masking covers only the assistant span; samples whose tokenized prompt/full prefix mismatch are dropped (asserted in the script) rather than silently misaligned.
+
+### Speeds, sizes, times
+
+- Full run: **53.3 min**, 2,547 steps, 3 epochs
+- Adapter output: 38.5 MB (weights) + 11 MB (tokenizer)
+- Inference: single forward pass, greedy, ≤120 new tokens
+
+## Evaluation
+
+**Metric:** exact string match of the full JSON output, compared after **removing all space characters** and normalizing full-width quotes. Not field-level, not semantic — downstream is an executor, so a wrong key name or an extra sentence breaks the call. Spaces are ignored because the model's habitual `"action": "call"` spacing is semantically identical; key names and values must match byte for byte.
+
+**Test data:** `training/data/dev_eval_60.jsonl` — the first 60 rows of `dev_mix.jsonl`.
+
+| Epoch | Avg loss | Exact match |
+|---|---|---|
+| 1 | 0.0526 | 58/60 = 97% |
+| 2 | 0.0030 | 59/60 = 98% |
+| 3 | 0.0012 | **60/60 = 100%** |
+
+Format learning is essentially complete after epoch 1; later epochs fit the specific data rather than improving capability. See `eval/EVAL.md` for the known failure modes and what would need to change to make this number meaningful (a hand-written adversarial test set, `ask` samples up to ~30%, a 15+ skill pool).
+
+## Technical Specifications
+
+- **Architecture:** Qwen3 decoder-only transformer, 0.6B params, 28 layers, hidden 1024
+- **Objective:** causal LM, next-token prediction, assistant-span loss only
+- **Compute:** 1× RTX 3080 20GB, Windows 11, Python 3.11, PyTorch 2.x, PEFT 0.21.2
+- Estimated energy: ~0.18 kWh for the full training run (53 min at ~200 W)
+
+## Citation
+
+```bibtex
+@misc{qwen3_06b_skill_router_2026,
+  title  = {Qwen3-0.6B Skill Router: a LoRA adapter for local skill routing},
+  author = {Local AI Lab},
+  year   = {2026},
+  note   = {LoRA adapter on Qwen/Qwen3-0.6B, trained on 3,394 synthetic routing samples}
+}
+```
+
+## More Information
+
+- `README.md` — Chinese overview, full system prompt, usage
+- `training/TRAINING_LOG.md` — all 14 training attempts, per-epoch curves, failure modes
+- `training/data/README.md` — dataset format and why the manifest is a plain string
+- `eval/EVAL.md` — evaluation protocol, error analysis, next steps
+
+### Framework versions
+
+- PEFT 0.21.2
+- Transformers 4.x

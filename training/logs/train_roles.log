@@ -1,0 +1,27 @@
+﻿python.exe : W1112 14:07:30.645000 10228 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] N
+OTE: Redirects are currently not supported in Windows or MacOs.
+所在位置 行:1 字符: 237
++ ... H_MODE="0"; & "D:\ai-lab\.venv\Scripts\python.exe" "D:\ai-lab\coordin ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (W1112 14:07:30....ndows or MacOs.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[1] 加载模型（bf16）
+
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]
+Loading weights:  11%|█         | 34/311 [00:00<00:00, 338.17it/s]
+Loading weights:  32%|███▏      | 99/311 [00:00<00:00, 509.04it/s]
+Loading weights:  53%|█████▎    | 164/311 [00:00<00:00, 568.32it/s]
+Loading weights:  72%|███████▏  | 225/311 [00:00<00:00, 583.98it/s]
+Loading weights:  93%|█████████▎| 288/311 [00:00<00:00, 595.14it/s]
+Loading weights: 100%|██████████| 311/311 [00:00<00:00, 577.54it/s]
+trainable params: 10,092,544 || all params: 606,142,464 || trainable%: 1.6650
+[2] 构造数据集
+    训练样本 2070（跳过 572）  验证 312
+[3] 开始训练  259 步/epoch × 3 = 777 步
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+    step 20/777  loss 0.2772  lr 1.08e-04
+    step 40/777  loss 0.3806  lr 1.99e-04
+    step 60/777  loss 0.0065  lr 1.94e-04
+    step 80/777  loss 0.0491  lr 1.89e-04
+    step 100/777  loss 0.0454  lr 1.83e-04

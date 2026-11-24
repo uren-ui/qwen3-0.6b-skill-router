@@ -1,0 +1,27 @@
+﻿python.exe : W1114 05:36:48.873000 10452 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] N
+OTE: Redirects are currently not supported in Windows or MacOs.
+所在位置 行:1 字符: 275
++ ... :BATCH="4"; & "D:\ai-lab\.venv\Scripts\python.exe" "D:\ai-lab\coordin ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (W1114 05:36:48....ndows or MacOs.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[1] 加载模型（bf16）
+
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]
+Loading weights:  14%|█▎        | 42/311 [00:00<00:00, 415.75it/s]
+Loading weights:  34%|███▍      | 105/311 [00:00<00:00, 537.60it/s]
+Loading weights:  55%|█████▍    | 170/311 [00:00<00:00, 576.42it/s]
+Loading weights:  77%|███████▋  | 239/311 [00:00<00:00, 616.00it/s]
+Loading weights:  98%|█████████▊| 304/311 [00:00<00:00, 621.72it/s]
+Loading weights: 100%|██████████| 311/311 [00:00<00:00, 606.59it/s]
+trainable params: 10,092,544 || all params: 606,142,464 || trainable%: 1.6650
+[2] 构造数据集
+    tokenize 0/3058
+    tokenize 200/3058
+    tokenize 400/3058
+    tokenize 600/3058
+    tokenize 800/3058
+    tokenize 1000/3058
+    tokenize 1200/3058
+    tokenize 1400/3058

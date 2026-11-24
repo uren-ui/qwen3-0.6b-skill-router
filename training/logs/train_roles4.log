@@ -1,0 +1,134 @@
+﻿python.exe : W1112 17:06:33.637000 15416 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] N
+OTE: Redirects are currently not supported in Windows or MacOs.
+所在位置 行:1 字符: 257
++ ... _LEN="640"; & "D:\ai-lab\.venv\Scripts\python.exe" "D:\ai-lab\coordin ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (W1112 17:06:33....ndows or MacOs.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[1] 加载模型（bf16）
+
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]
+Loading weights:  14%|█▍        | 43/311 [00:00<00:00, 393.68it/s]
+Loading weights:  35%|███▌      | 109/311 [00:00<00:00, 535.04it/s]
+Loading weights:  55%|█████▍    | 171/311 [00:00<00:00, 567.35it/s]
+Loading weights:  74%|███████▍  | 230/311 [00:00<00:00, 568.67it/s]
+Loading weights:  95%|█████████▍| 295/311 [00:00<00:00, 591.83it/s]
+Loading weights: 100%|██████████| 311/311 [00:00<00:00, 579.53it/s]
+trainable params: 10,092,544 || all params: 606,142,464 || trainable%: 1.6650
+[2] 构造数据集
+    tokenize 0/2670
+    tokenize 200/2670
+    tokenize 400/2670
+    tokenize 600/2670
+    tokenize 800/2670
+    tokenize 1000/2670
+    tokenize 1200/2670
+    tokenize 1400/2670
+    tokenize 1600/2670
+    tokenize 1800/2670
+    tokenize 2000/2670
+    tokenize 2200/2670
+    tokenize 2400/2670
+    tokenize 2600/2670
+    训练样本 2022（跳过 648）  验证 312
+[3] 开始训练  253 步/epoch × 3 = 759 步
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+    step 20/759  loss 0.2754  lr 1.11e-04
+    step 40/759  loss 0.0181  lr 1.99e-04
+    step 60/759  loss 0.0692  lr 1.94e-04
+    step 80/759  loss 0.0271  lr 1.88e-04
+    step 100/759  loss 0.0133  lr 1.83e-04
+    step 120/759  loss 0.0230  lr 1.77e-04
+    step 140/759  loss 0.0315  lr 1.71e-04
+    step 160/759  loss 0.0309  lr 1.66e-04
+    step 180/759  loss 0.0048  lr 1.60e-04
+    step 200/759  loss 0.0090  lr 1.55e-04
+    step 220/759  loss 0.0040  lr 1.49e-04
+    step 240/759  loss 0.0004  lr 1.44e-04
+  epoch 1 平均 loss 0.0813
+Traceback (most recent call last):
+  File "D:\ai-lab\coordinator\train_judge.py", line 244, in <module>
+    main()
+  File "D:\ai-lab\coordinator\train_judge.py", line 231, in main
+    ok, total = evaluate(model, tok, dev_rows, limit=60)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\coordinator\train_judge.py", line 154, in evaluate
+    out = model.generate(**ids, max_new_tokens=120, do_sample=False,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\peft\peft_model.py", line 2242, in generate
+    outputs = self.base_model.generate(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\transformers\generation\utils.py", line 3000, in generate
+    result = decoding_method(
+             ^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\transformers\generation\utils.py", line 3228, in _sample
+    outputs = model_forward(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\transformers\utils\generic.py", line 943, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\transformers\models\qwen3\modeling_qwen3.py", line 469, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\transformers\utils\generic.py", line 1081, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\transformers\utils\output_capturing.py", line 287, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\transformers\models\qwen3\modeling_qwen3.py", line 405, in forward
+    hidden_states = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\transformers\modeling_layers.py", line 111, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\transformers\models\qwen3\modeling_qwen3.py", line 299, in forward
+    hidden_states, _ = self.self_attn(
+                       ^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\transformers\models\qwen3\modeling_qwen3.py", line 271, in forward
+    attn_output = self.o_proj(attn_output)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ai-lab\.venv\Lib\site-packages\peft\tuners\lora\layer.py", line 1113, in forward
+    result = result.to(torch_result_dtype)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.AcceleratorError: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for m
+ore information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

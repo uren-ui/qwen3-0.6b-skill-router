@@ -1,0 +1,7 @@
+# 40MB 单文件，未超 GitHub 100MB 硬上限，直接用普通 git 即可，不强制 LFS。
+*.safetensors -text
+*.json    text eol=lf
+*.jsonl   text eol=lf
+*.md      text eol=lf
+*.py      text eol=lf
+*.ps1     text eol=crlf

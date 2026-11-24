@@ -1,0 +1,80 @@
+﻿python.exe : W1112 16:10:35.558000 28384 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] N
+OTE: Redirects are currently not supported in Windows or MacOs.
+所在位置 行:1 字符: 257
++ ... _LEN="640"; & "D:\ai-lab\.venv\Scripts\python.exe" "D:\ai-lab\coordin ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (W1112 16:10:35....ndows or MacOs.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[1] 加载模型（bf16）
+
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]
+Loading weights:  12%|█▏        | 38/311 [00:00<00:00, 365.70it/s]
+Loading weights:  32%|███▏      | 101/311 [00:00<00:00, 512.96it/s]
+Loading weights:  53%|█████▎    | 164/311 [00:00<00:00, 549.11it/s]
+Loading weights:  74%|███████▎  | 229/311 [00:00<00:00, 579.20it/s]
+Loading weights:  92%|█████████▏| 287/311 [00:00<00:00, 576.79it/s]
+Loading weights: 100%|██████████| 311/311 [00:00<00:00, 571.39it/s]
+trainable params: 10,092,544 || all params: 606,142,464 || trainable%: 1.6650
+[2] 构造数据集
+    训练样本 2642（跳过 0）  验证 312
+[3] 开始训练  331 步/epoch × 3 = 993 步
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+    step 20/993  loss 0.0943  lr 8.41e-05
+    step 40/993  loss 0.0200  lr 1.65e-04
+    step 60/993  loss 0.1147  lr 1.98e-04
+    step 80/993  loss 0.0366  lr 1.93e-04
+    step 100/993  loss 0.0009  lr 1.89e-04
+    step 120/993  loss 0.0024  lr 1.85e-04
+    step 140/993  loss 0.0245  lr 1.81e-04
+    step 160/993  loss 0.0003  lr 1.76e-04
+    step 180/993  loss 0.0097  lr 1.72e-04
+    step 200/993  loss 0.0017  lr 1.68e-04
+    step 220/993  loss 0.0012  lr 1.64e-04
+    step 240/993  loss 0.0034  lr 1.60e-04
+    step 260/993  loss 0.0017  lr 1.55e-04
+    step 280/993  loss 0.0012  lr 1.51e-04
+    step 300/993  loss 0.0176  lr 1.47e-04
+    step 320/993  loss 0.0000  lr 1.43e-04
+  epoch 1 平均 loss 0.0677
+  >> 验证集精确匹配 56/60 = 93%
+    step 340/993  loss 0.0002  lr 1.38e-04
+    step 360/993  loss 0.0108  lr 1.34e-04
+    step 380/993  loss 0.0009  lr 1.30e-04
+    step 400/993  loss 0.0001  lr 1.26e-04
+    step 420/993  loss 0.0004  lr 1.21e-04
+    step 440/993  loss 0.0003  lr 1.17e-04
+    step 460/993  loss 0.0011  lr 1.13e-04
+    step 480/993  loss 0.0001  lr 1.09e-04
+    step 500/993  loss 0.0000  lr 1.04e-04
+    step 520/993  loss 0.0006  lr 1.00e-04
+    step 540/993  loss 0.0001  lr 9.60e-05
+    step 560/993  loss 0.0004  lr 9.17e-05
+    step 580/993  loss 0.0020  lr 8.75e-05
+    step 600/993  loss 0.0001  lr 8.33e-05
+    step 620/993  loss 0.0000  lr 7.90e-05
+    step 640/993  loss 0.0000  lr 7.48e-05
+    step 660/993  loss 0.0027  lr 7.06e-05
+  epoch 2 平均 loss 0.0031
+  >> 验证集精确匹配 60/60 = 100%
+    step 680/993  loss 0.0000  lr 6.63e-05
+    step 700/993  loss 0.0005  lr 6.21e-05
+    step 720/993  loss 0.0001  lr 5.78e-05
+    step 740/993  loss 0.0000  lr 5.36e-05
+    step 760/993  loss 0.0028  lr 4.94e-05
+    step 780/993  loss 0.0001  lr 4.51e-05
+    step 800/993  loss 0.0001  lr 4.09e-05
+    step 820/993  loss 0.0001  lr 3.67e-05
+    step 840/993  loss 0.0000  lr 3.24e-05
+    step 860/993  loss 0.0033  lr 2.82e-05
+    step 880/993  loss 0.0001  lr 2.39e-05
+    step 900/993  loss 0.0000  lr 1.97e-05
+    step 920/993  loss 0.0000  lr 1.55e-05
+    step 940/993  loss 0.0012  lr 1.12e-05
+    step 960/993  loss 0.0000  lr 6.99e-06
+    step 980/993  loss 0.0004  lr 2.75e-06
+  epoch 3 平均 loss 0.0005
+  >> 验证集精确匹配 60/60 = 100%
+[4] 保存 adapter
+    已保存到 D:\ai-lab\coordinator\lora_roles（49.5MB）
+总耗时 26.8 分钟

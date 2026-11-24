@@ -1,0 +1,145 @@
+﻿python.exe : W1112 19:52:14.413000 11544 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] N
+OTE: Redirects are currently not supported in Windows or MacOs.
+所在位置 行:1 字符: 273
++ ... :BATCH="4"; & "D:\ai-lab\.venv\Scripts\python.exe" "D:\ai-lab\coordin ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (W1112 19:52:14....ndows or MacOs.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[1] 加载模型（bf16）
+
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]
+Loading weights:   3%|▎         | 9/311 [00:00<00:03, 88.92it/s]
+Loading weights:  22%|██▏       | 67/311 [00:00<00:00, 374.53it/s]
+Loading weights:  41%|████      | 126/311 [00:00<00:00, 464.36it/s]
+Loading weights:  56%|█████▌    | 174/311 [00:00<00:00, 468.87it/s]
+Loading weights:  71%|███████   | 221/311 [00:00<00:00, 453.14it/s]
+Loading weights:  92%|█████████▏| 285/311 [00:00<00:00, 514.24it/s]
+Loading weights: 100%|██████████| 311/311 [00:00<00:00, 478.24it/s]
+trainable params: 10,092,544 || all params: 606,142,464 || trainable%: 1.6650
+[2] 构造数据集
+    tokenize 0/2670
+    tokenize 200/2670
+    tokenize 400/2670
+    tokenize 600/2670
+    tokenize 800/2670
+    tokenize 1000/2670
+    tokenize 1200/2670
+    tokenize 1400/2670
+    tokenize 1600/2670
+    tokenize 1800/2670
+    tokenize 2000/2670
+    tokenize 2200/2670
+    tokenize 2400/2670
+    tokenize 2600/2670
+    训练样本 2650（跳过 20）  验证 312
+[3] 开始训练  663 步/epoch × 3 = 1989 步
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+    step 20/1989  loss 0.0767  lr 4.21e-05
+    step 40/1989  loss 0.0239  lr 8.33e-05
+    step 60/1989  loss 0.2023  lr 1.24e-04
+    step 80/1989  loss 0.0210  lr 1.63e-04
+    step 100/1989  loss 0.0011  lr 2.00e-04
+    step 120/1989  loss 0.0317  lr 1.98e-04
+    step 140/1989  loss 0.0072  lr 1.96e-04
+    step 160/1989  loss 0.0640  lr 1.94e-04
+    step 180/1989  loss 0.0097  lr 1.91e-04
+    step 200/1989  loss 0.1214  lr 1.89e-04
+    step 220/1989  loss 0.1045  lr 1.87e-04
+    step 240/1989  loss 0.0102  lr 1.85e-04
+    step 260/1989  loss 0.0113  lr 1.83e-04
+    step 280/1989  loss 0.0017  lr 1.81e-04
+    step 300/1989  loss 0.0001  lr 1.79e-04
+    step 320/1989  loss 0.0001  lr 1.77e-04
+    step 340/1989  loss 0.2546  lr 1.74e-04
+    step 360/1989  loss 0.0009  lr 1.72e-04
+    step 380/1989  loss 0.0004  lr 1.70e-04
+    step 400/1989  loss 0.0001  lr 1.68e-04
+    step 420/1989  loss 0.0003  lr 1.66e-04
+    step 440/1989  loss 0.2032  lr 1.64e-04
+    step 460/1989  loss 0.0049  lr 1.62e-04
+    step 480/1989  loss 0.0005  lr 1.60e-04
+    step 500/1989  loss 0.0031  lr 1.58e-04
+    step 520/1989  loss 0.0056  lr 1.55e-04
+    step 540/1989  loss 0.0002  lr 1.53e-04
+    step 560/1989  loss 0.0020  lr 1.51e-04
+    step 580/1989  loss 0.0009  lr 1.49e-04
+    step 600/1989  loss 0.1176  lr 1.47e-04
+    step 620/1989  loss 0.0006  lr 1.45e-04
+    step 640/1989  loss 0.0014  lr 1.43e-04
+    step 660/1989  loss 0.0014  lr 1.41e-04
+  epoch 1 平均 loss 0.0649
+  >> 验证集精确匹配 59/60 = 98%
+    step 680/1989  loss 0.0002  lr 1.39e-04
+    step 700/1989  loss 0.0001  lr 1.36e-04
+    step 720/1989  loss 0.0000  lr 1.34e-04
+    step 740/1989  loss 0.0011  lr 1.32e-04
+    step 760/1989  loss 0.0018  lr 1.30e-04
+    step 780/1989  loss 0.0674  lr 1.28e-04
+    step 800/1989  loss 0.0002  lr 1.26e-04
+    step 820/1989  loss 0.0001  lr 1.24e-04
+    step 840/1989  loss 0.0258  lr 1.22e-04
+    step 860/1989  loss 0.0026  lr 1.19e-04
+    step 880/1989  loss 0.0001  lr 1.17e-04
+    step 900/1989  loss 0.0161  lr 1.15e-04
+    step 920/1989  loss 0.0025  lr 1.13e-04
+    step 940/1989  loss 0.0000  lr 1.11e-04
+    step 960/1989  loss 0.0001  lr 1.09e-04
+    step 980/1989  loss 0.0002  lr 1.07e-04
+    step 1000/1989  loss 0.0001  lr 1.05e-04
+    step 1020/1989  loss 0.0028  lr 1.03e-04
+    step 1040/1989  loss 0.0000  lr 1.00e-04
+    step 1060/1989  loss 0.0385  lr 9.83e-05
+    step 1080/1989  loss 0.0001  lr 9.62e-05
+    step 1100/1989  loss 0.0001  lr 9.41e-05
+    step 1120/1989  loss 0.0003  lr 9.20e-05
+    step 1140/1989  loss 0.0084  lr 8.98e-05
+    step 1160/1989  loss 0.0000  lr 8.77e-05
+    step 1180/1989  loss 0.0001  lr 8.56e-05
+    step 1200/1989  loss 0.0001  lr 8.35e-05
+    step 1220/1989  loss 0.0000  lr 8.14e-05
+    step 1240/1989  loss 0.0000  lr 7.93e-05
+    step 1260/1989  loss 0.0000  lr 7.71e-05
+    step 1280/1989  loss 0.0040  lr 7.50e-05
+    step 1300/1989  loss 0.0029  lr 7.29e-05
+    step 1320/1989  loss 0.0002  lr 7.08e-05
+  epoch 2 平均 loss 0.0032
+  >> 验证集精确匹配 60/60 = 100%
+    step 1340/1989  loss 0.0010  lr 6.87e-05
+    step 1360/1989  loss 0.0000  lr 6.66e-05
+    step 1380/1989  loss 0.0003  lr 6.44e-05
+    step 1400/1989  loss 0.0003  lr 6.23e-05
+    step 1420/1989  loss 0.0001  lr 6.02e-05
+    step 1440/1989  loss 0.0001  lr 5.81e-05
+    step 1460/1989  loss 0.0002  lr 5.60e-05
+    step 1480/1989  loss 0.0013  lr 5.39e-05
+    step 1500/1989  loss 0.0001  lr 5.17e-05
+    step 1520/1989  loss 0.0104  lr 4.96e-05
+    step 1540/1989  loss 0.0001  lr 4.75e-05
+    step 1560/1989  loss 0.0000  lr 4.54e-05
+    step 1580/1989  loss 0.0000  lr 4.33e-05
+    step 1600/1989  loss 0.0000  lr 4.12e-05
+    step 1620/1989  loss 0.0001  lr 3.90e-05
+    step 1640/1989  loss 0.0000  lr 3.69e-05
+    step 1660/1989  loss 0.0006  lr 3.48e-05
+    step 1680/1989  loss 0.0000  lr 3.27e-05
+    step 1700/1989  loss 0.0000  lr 3.06e-05
+    step 1720/1989  loss 0.0218  lr 2.85e-05
+    step 1740/1989  loss 0.0000  lr 2.63e-05
+    step 1760/1989  loss 0.0005  lr 2.42e-05
+    step 1780/1989  loss 0.0000  lr 2.21e-05
+    step 1800/1989  loss 0.0005  lr 2.00e-05
+    step 1820/1989  loss 0.0000  lr 1.79e-05
+    step 1840/1989  loss 0.0002  lr 1.58e-05
+    step 1860/1989  loss 0.0000  lr 1.37e-05
+    step 1880/1989  loss 0.0000  lr 1.15e-05
+    step 1900/1989  loss 0.0000  lr 9.42e-06
+    step 1920/1989  loss 0.0002  lr 7.30e-06
+    step 1940/1989  loss 0.0000  lr 5.19e-06
+    step 1960/1989  loss 0.0000  lr 3.07e-06
+    step 1980/1989  loss 0.0005  lr 9.52e-07
+  epoch 3 平均 loss 0.0005
+  >> 验证集精确匹配 60/60 = 100%
+[4] 保存 adapter
+    已保存到 D:\ai-lab\coordinator\lora_roles（49.5MB）
+总耗时 28.2 分钟
